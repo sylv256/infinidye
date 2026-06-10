@@ -1,0 +1,41 @@
+[versions]
+# The latest versions are available at https://lambdaurora.dev/tools/import_quilt.html
+# https://fabricmc.net/develop/ for fabric
+
+# Base
+minecraft = "26.1.2"
+fabric_loader = "0.19.3"
+
+# Libraries
+fabric_api = "0.151.0+26.1.2"
+frappe = "1.0.0-alpha.4"
+
+# Mod Integrations
+sodium = "0.8.12+mc26.1.2"
+
+# Runtime Mods
+modmenu = "18.0.0-beta.1"
+
+[libraries]
+# Base
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
+
+# Libraries
+fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+frappe = { module = "gay.sylv.frappe:frappe", version.ref = "frappe" }
+frappe-ext-terrain-material = { module = "gay.sylv.frappe:frappe-ext-terrain-material", version.ref = "frappe" }
+
+# Integrations
+
+# Runtime
+sodium = { module = "net.caffeinemc:sodium-fabric", version.ref = "sodium" }
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+
+# If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
+[bundles]
+
+[plugins]
+fabric_loom = { id = "net.fabricmc.fabric-loom", version = "1.17-SNAPSHOT" }
+extra-java-module-info = { id = "org.gradlex.extra-java-module-info", version = "1.13.1" }
+yumi-gradle-licenser = { id = "dev.yumi.gradle.licenser", version = "2.2.+" }

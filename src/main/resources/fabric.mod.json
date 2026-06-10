@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "${mod_id}",
+	"version": "${version}",
+	"name": "Infinidye",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Sylv <contact@sylv.gay>"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/infinidye",
+		"sources": "https://github.com/sylv256/infinidye"
+	},
+	"license": "CC-BY-SA-3.0",
+	"icon": "assets/${mod_id}/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"gay.sylv.infinidye.Infinidye"
+		],
+		"client": [
+			"gay.sylv.infinidye.client.InfinidyeClient"
+		],
+		"fabric-datagen": [
+			"gay.sylv.infinidye.client.InfinidyeDataGenerator"
+		]
+	},
+	"mixins": [
+		"infinidye.mixins.json",
+		{
+			"config": "infinidye.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
