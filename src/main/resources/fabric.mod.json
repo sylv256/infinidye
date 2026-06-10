@@ -11,7 +11,7 @@
 		"homepage": "https://modrinth.com/mod/infinidye",
 		"sources": "https://github.com/sylv256/infinidye"
 	},
-	"license": "CC-BY-SA-3.0",
+	"license": "LGPL-3.0",
 	"icon": "assets/${mod_id}/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -23,6 +23,9 @@
 		],
 		"fabric-datagen": [
 			"gay.sylv.infinidye.client.InfinidyeDataGenerator"
+		],
+		"frappe-ext-terrain-material:registry": [
+			"gay.sylv.infinidye.client.frappe.FrappeEntrypoints"
 		]
 	},
 	"mixins": [
@@ -37,5 +40,14 @@
 		"minecraft": "~26.1.2",
 		"java": ">=25",
 		"fabric-api": "*"
+	},
+	"custom": {
+		"frappe": {
+			"schemaVersion": 0,
+			"override": true,
+			"config": {
+				"frappe-ext-terrain-material.enabled": true
+			}
+		}
 	}
 }

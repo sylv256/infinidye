@@ -8,7 +8,7 @@ fabric_loader = "0.19.3"
 
 # Libraries
 fabric_api = "0.151.0+26.1.2"
-frappe = "1.0.0-alpha.4"
+frappe = "1.0.0-alpha.8"
 
 # Mod Integrations
 sodium = "0.8.12+mc26.1.2"

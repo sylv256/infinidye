@@ -2,4 +2,4 @@
 
 ## License
 
-This mod is available under CC-BY-SA 3.0.
+This mod is available under LGPLv3.

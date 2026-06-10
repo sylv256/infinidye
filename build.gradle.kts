@@ -94,6 +94,14 @@ tasks.jar {
 	from("LICENSE") {
 		rename { "${it}_${project.name}" }
 	}
+
+	from("COPYING") {
+		rename { "${it}_${project.name}" }
+	}
+
+	from("COPYING.LESSER") {
+		rename { "${it}_${project.name}" }
+	}
 }
 
 // configure the maven publication

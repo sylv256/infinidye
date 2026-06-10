@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "infinidye:item/infinidye",
+		"layer1": "infinidye:item/infinidye_plate"
+	}
+}
