@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.DyedItemColor;
@@ -80,8 +81,9 @@ public class InfinidyeItem extends Item {
 			chunk.setAttached(ModAttachments.INFINIDYE, null);
 			return;
 		}
+		//Multiplicative blending for now
+		colors[getColorIndex(blockPos, chunk)] = previousColor == 0 ? color : ARGB.multiply(previousColor, color);
 
-		colors[getColorIndex(blockPos, chunk)] = color;
 		chunk.setAttached(
 				ModAttachments.INFINIDYE,
 				InfinidyeAttachment.update(colors, nonZeroCount, attachment.identity(), blockPos)
