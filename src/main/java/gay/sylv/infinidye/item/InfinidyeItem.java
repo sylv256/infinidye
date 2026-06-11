@@ -35,42 +35,57 @@ public class InfinidyeItem extends Item {
 				color = dyedItemColor.rgb();
 			}
 
-			BlockPos blockPos = context.getClickedPos();
-			ChunkAccess chunk = level.getChunkAt(blockPos);
-			int arrayLength = 4096 * chunk.getSectionsCount();
-			InfinidyeAttachment attachment = chunk.getAttachedOrGet(
-					ModAttachments.INFINIDYE,
-					() -> InfinidyeAttachment.of(new int[arrayLength], 0, blockPos)
-			);
-			int[] colors = attachment.colors();
-
-			if (colors.length < arrayLength) {
-				colors = Arrays.copyOf(colors, arrayLength);
-			}
-
-			int nonZeroCount = attachment.nonZeroCount();
-			int previousColor = colors[getColorIndex(blockPos, chunk)];
-
-			if (previousColor == 0 && color != 0) {
-				nonZeroCount++;
-			} else if (previousColor != 0 && color == 0) {
-				nonZeroCount--;
-			}
-
-			// don't waste space; delete unused data
-			if (nonZeroCount == 0) {
-				chunk.setAttached(ModAttachments.INFINIDYE, InfinidyeAttachment.empty(blockPos));
-				chunk.setAttached(ModAttachments.INFINIDYE, null);
-			}
-
-			colors[getColorIndex(blockPos, chunk)] = color;
-			chunk.setAttached(
-					ModAttachments.INFINIDYE,
-					InfinidyeAttachment.update(colors, nonZeroCount, attachment.identity(), blockPos)
-			);
+			setDyeColor(context.getClickedPos(), level, color);
 		}
 
 		return InteractionResult.SUCCESS_SERVER;
+	}
+
+	public static void setDyeColor(
+			BlockPos blockPos,
+			Level level,
+			int color
+	) {
+		ChunkAccess chunk = level.getChunkAt(blockPos);
+		int arrayLength = 4096 * chunk.getSectionsCount();
+
+		// skip sending unnecessary packets and saving unnecessary data
+		//  if there already is no attachment
+		if (color == 0 && !chunk.hasAttached(ModAttachments.INFINIDYE)) {
+			return;
+		}
+
+		InfinidyeAttachment attachment = chunk.getAttachedOrGet(
+				ModAttachments.INFINIDYE,
+				() -> InfinidyeAttachment.of(new int[arrayLength], 0, blockPos)
+		);
+		int[] colors = attachment.colors();
+
+		if (colors.length < arrayLength) {
+			colors = Arrays.copyOf(colors, arrayLength);
+		}
+
+		int nonZeroCount = attachment.nonZeroCount();
+		int previousColor = colors[getColorIndex(blockPos, chunk)];
+
+		if (previousColor == 0 && color != 0) {
+			nonZeroCount++;
+		} else if (previousColor != 0 && color == 0) {
+			nonZeroCount--;
+		}
+
+		// don't waste space; delete unused data
+		if (nonZeroCount == 0) {
+			chunk.setAttached(ModAttachments.INFINIDYE, InfinidyeAttachment.empty(blockPos));
+			chunk.setAttached(ModAttachments.INFINIDYE, null);
+			return;
+		}
+
+		colors[getColorIndex(blockPos, chunk)] = color;
+		chunk.setAttached(
+				ModAttachments.INFINIDYE,
+				InfinidyeAttachment.update(colors, nonZeroCount, attachment.identity(), blockPos)
+		);
 	}
 
 	public static int getColorIndex(

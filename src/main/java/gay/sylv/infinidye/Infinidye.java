@@ -1,6 +1,7 @@
 package gay.sylv.infinidye;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import net.minecraft.resources.Identifier;
 
 import gay.sylv.infinidye.attachment.ModAttachments;
 import gay.sylv.infinidye.block.ModBlocks;
+import gay.sylv.infinidye.item.InfinidyeItem;
 import gay.sylv.infinidye.item.ModItems;
 
 public class Infinidye implements ModInitializer {
@@ -28,6 +30,10 @@ public class Infinidye implements ModInitializer {
 		ModAttachments.initialize();
 		ModItems.initialize();
 		ModBlocks.initialize();
+
+		// pls don't lag lol
+		// also this doesn't work when it's world edit or similar. womp womp
+		PlayerBlockBreakEvents.AFTER.register((level, _, blockPos, _, _) -> InfinidyeItem.setDyeColor(blockPos, level, 0));
 	}
 
 	public static Identifier modId(String path) {
