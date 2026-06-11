@@ -6,6 +6,8 @@ const in vec2 frp_texCoord;
 
 const in vec4 frp_vertColor;
 
+const in float ftm_vertAo;
+
 out vec4 frp_fragColor;
 
 in vec4 infd_vertColor;
