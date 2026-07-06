@@ -3,7 +3,7 @@
 	"id": "${mod_id}",
 	"version": "${version}",
 	"name": "Infinidye",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Phenom-7280 \"Infinidye\" is a para-object that, when applied to a surface, manipulates the object's perceived color.",
 	"authors": [
 		"Sylv <contact@sylv.gay>"
 	],
